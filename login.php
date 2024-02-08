@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * import file init.php
+ * file ini berisi operasi yang umum digunakan dalam setiap halaman
+ * seperti:
+ * - memulai session
+ * - mengimport file lain yang berisi function yang berfungsi untuk menyambungkan database, dll
+ * - dll
+ */
 require 'init.php';
 
 // semua yang berawalan '$' (dolar) adalah variabel
@@ -28,13 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // jika form dikirim
 
 <?php
 
-$title = 'Login'; // judul halaman = Login
-require 'layout/header.php' // tambahkan header (bagian atas halaman, yang berisi judul)
+$title = 'Login'; // judul halaman
+require 'layout/header.php' // import file header (bagian atas halaman yang berisi metadata, judul, css, js, dll)
 ?>
 
+<!-- menampilkan pesan - pesan error jika ada -->
 <?php foreach (session_get('errors') as $error) : ?>
     <div><?= $error ?></div>
 <?php endforeach ?>
+
+<!-- form login -->
 <form action="" method="post">
     <label for="username">Username</label>
     <input type="text" name="username" id=""><br>
@@ -43,4 +55,5 @@ require 'layout/header.php' // tambahkan header (bagian atas halaman, yang beris
     <button type="submit">Login</button>
 </form>
 
+<!-- import footer -->
 <?php require 'layout/footer.php' ?>
