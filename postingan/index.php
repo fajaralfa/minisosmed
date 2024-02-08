@@ -37,7 +37,7 @@ $posts_count = count($posts); // ambil data jumlah postingan yang diambil
                 </div>
                 <div>
                     <!-- waktu posting -->
-                    <?= $post['waktu'] ?>
+                    <?= date("H:i d M Y", strtotime($post['waktu'])) ?>
                 </div>
             </div>
             <div>
