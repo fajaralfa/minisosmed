@@ -41,19 +41,27 @@ $title = 'Login'; // judul halaman
 require 'layout/header.php' // import file header (bagian atas halaman yang berisi metadata, judul, css, js, dll)
 ?>
 
-<!-- menampilkan pesan - pesan error jika ada -->
-<?php foreach (session_get('errors') as $error) : ?>
-    <div><?= $error ?></div>
-<?php endforeach ?>
-
 <!-- form login -->
-<form action="" method="post">
-    <label for="username">Username</label>
-    <input type="text" name="username" id=""><br>
-    <label for="password">Password</label>
-    <input type="password" name="password" id=""><br>
-    <button type="submit">Login</button>
-</form>
+<div class="container py-5">
+    <h1 class="text-center mb-5 h2">Login | Aplikasi</h1>
+    <form action="" method="post" style="max-width: 25em;" class="d-flex flex-column gap-4 mx-auto">
+        <!-- menampilkan pesan - pesan error jika ada -->
+        <?php foreach (session_get('errors') as $error) : ?>
+            <div class="alert alert-danger"><?= $error ?></div>
+        <?php endforeach ?>
+        <div>
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" id="" placeholder="Username" class="form-control">
+        </div>
+        <div>
+            <label for="password" class="formm-label">Password</label>
+            <input type="password" name="password" id="" placeholder="******" class="form-control">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </form>
+</div>
 
 <!-- import footer -->
 <?php require 'layout/footer.php' ?>
