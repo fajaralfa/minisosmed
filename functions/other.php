@@ -26,3 +26,9 @@ function str_has(string $haystack, array $needles)
 
     return $flag;
 }
+
+function uri_for($uri)
+{
+    $root = explode('/', $_SERVER['REQUEST_URI'])[1];
+    return "/{$root}$uri";
+}
