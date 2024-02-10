@@ -21,14 +21,15 @@ $posts_count = count($posts); // ambil data jumlah postingan yang diambil
 ?>
 
 <!-- header dan navigasi -->
-<?php $title = 'Postingan'; require '../layout/header.php' ?>
+<?php $title = 'Postingan';
+require '../layout/header.php' ?>
 <?php require '../layout/nav.php' ?>
 
 <!-- bagian untuk postingan -->
-<div class="border rounded-2 m-auto" style="width: 35em; min-height: 30em;">
+<div class="container rounded-2 mx-auto bg-white" style="max-width: 35em;">
     <!-- tampilkan setiap postingan -->
     <?php foreach ($posts as $post) : ?>
-        <div class="card card-primary" id="post-<?= $post['id'] ?>">
+        <div class="card border-0 border-top border-bottom" id="post-<?= $post['id'] ?>">
             <div class="card-header bg-white p-1 d-flex justify-content-between align-items-center" style="font-size: 0.8em;">
                 <div>
                     <!-- data pembuat postingan -->
@@ -40,38 +41,34 @@ $posts_count = count($posts); // ambil data jumlah postingan yang diambil
                     <?= date("H:i d M Y", strtotime($post['waktu'])) ?>
                 </div>
             </div>
-            <div>
+            <div class="card-body p-0">
                 <!-- gambar yang diposting -->
-                <img src="../upload/<?= $post['gambar'] ?>" alt="" srcset="" width="100%">
-            </div>
-            <div class="border px-3">
-                <div class="mt-2 d-flex justify-content-between" style="font-size: small;">
-                    <div>
-                        <!-- formulir untuk menyukai postingan -->
-                        <form action="like.php" method="post">
-                            <input type="hidden" name="users_id" value="<?= $user['id'] ?>">
-                            <input type="hidden" name="posts_id" value="<?= $post['id'] ?>">
-                            <button type="submit">Like</button>
-                        </form>
+                <img src="../upload/<?= $post['gambar'] ?>" alt="" srcset="" width="100%" class="rounded-1 shadow-lg">
+                <div class="d-flex align-items-start py-2" style="font-size: small; gap: 1em;">
+                    <!-- formulir untuk menyukai postingan -->
+                    <form action="like.php" method="post">
+                        <input type="hidden" name="users_id" value="<?= $user['id'] ?>">
+                        <input type="hidden" name="posts_id" value="<?= $post['id'] ?>">
+                        <button type="submit" class="btn p-0">
+                            <img src="../assets/icon/like.svg" alt="like button" style="height: 20px;">
+                        </button>
                         <!-- tampilkan jumlah postingan -->
                         <div class="text-center"><?= $post['likes'] ?></div>
-                    </div>
-                    <div>
-                        <!--
-                            jika id pembuat postingan sama dengan id yang melihat postingan (user),
-                            maka tampilkan opsi hapus
-                        -->
-                        <?php if ($post['users_id'] == $user['id']) : ?>
-                            <form action="hapus.php" method="post">
-                                <input type="hidden" name="posts_id" value="<?= $post['id'] ?>">
-                                <button type="submit" onclick="return confirm('Hapus postingan ini?')">Hapus</button>
-                            </form>
-                        <?php endif ?>
-                    </div>
+                    </form>
+                    <!-- tampilkan opsi edit dan hapus jika user yang login adalah yang membuat postingan -->
+                    <?php if ($post['users_id'] == $user['id']) : ?>
+                        <a href="edit.php?id=<?= $post['id'] ?>" class="btn p-0"><img src="../assets/icon/edit.svg" alt="" style="height: 20px;"></a>
+                        <form action="hapus.php" method="post">
+                            <input type="hidden" name="posts_id" value="<?= $post['id'] ?>">
+                            <button type="submit" onclick="return confirm('Hapus postingan ini?')" class="btn p-0">
+                                <img src="../assets/icon/delete.svg" alt="delete button" style="height: 20px;">
+                            </button>
+                        </form>
+                    <?php endif ?>
                 </div>
             </div>
-            <div class="card-body p-2" style="min-height: 4em;">
-            <!-- teks captionnyaa -->
+            <div class="px-3 pb-5">
+                <!-- teks captionnyaa -->
                 <?= $post['caption'] ?>
             </div>
         </div>
