@@ -19,15 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // jika form nya dikirim
 <?php require '../layout/nav.php' ?>
 
 <!--
-    Penjelasan form:
+    Penjelasan
     action="" kosong karena kita akan mengirim formulir ke halaman yang sama
     enctype="multipart/form-data" harus menambahkan ini jika ingin mengupload file,
         jika tidak maka filenya tidak akan bisa diupload
 -->
-<form action="" method="post" enctype="multipart/form-data">
-    <input type="file" name="foto" id=""><br>
-    <textarea name="caption" id="" cols="30" rows="10"></textarea><br>
-    <button type="submit">Posting</button>
+<form action="" method="post" enctype="multipart/form-data" class="container p-5">
+    <input type="file" name="foto" id="" class="form-control"><br>
+    <textarea name="caption" id="" cols="30" rows="10" class="form-control"></textarea><br>
+    <button type="submit" class="btn btn-primary">Posting</button>
 </form>
 
 <!-- import footer -->
